@@ -1,26 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Image Import</title>
+    <meta charset="UTF-8">
+    <title>Google Drive Image Import</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Google Drive Image Import</h1>
+<div class="container">
+    <header class="header">
+        <h1>Google Drive Image Import</h1>
+        <p class="subtitle">Import images from a public Google Drive folder</p>
+    </header>
 
-<input type="text" id="folderUrl" placeholder="Paste Google Drive folder link">
-<br><br>
-<button onclick="importImages()">Import</button>
-<button onclick="cancelImport()">Cancel</button>
-<button onclick="clearUI()">Clear</button>
-<button onclick="loadImages()">Refresh</button>
+    <section class="controls">
+        <input 
+            type="text" 
+            id="folderUrl" 
+            placeholder="Paste Google Drive folder link"
+        >
 
+        <div class="button-group">
+            <button class="btn primary" onclick="importImages()">Import</button>
+            <button class="btn warning" onclick="cancelImport()">Cancel</button>
+            <button class="btn" onclick="clearUI()">Clear</button>
+            <button class="btn" onclick="loadImages()">Refresh</button>
+        </div>
+    </section>
 
-<h2>Images</h2>
-<div id="gallery"></div>
+    <section class="gallery-section">
+        <h2>Images</h2>
+        <div id="gallery" class="gallery"></div>
+    </section>
+</div>
 
 <script src="script.js"></script>
-
-
 </body>
 </html>

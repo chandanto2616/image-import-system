@@ -46,16 +46,10 @@ async function cancelImport() {
 function clearUI() {
     stopAutoRefresh();
 
-    // Clear image display
     document.getElementById("gallery").innerHTML = "";
-
-    // Clear folder input field
     document.getElementById("folderUrl").value = "";
-
-    // Reset current folder tracking
     currentFolderId = null;
 }
-
 
 async function loadImages() {
     if (!currentFolderId) return;
@@ -72,8 +66,6 @@ async function loadImages() {
     data.images.forEach(img => {
         const image = document.createElement("img");
         image.src = img.storage_path;
-        image.style.width = "150px";
-        image.style.margin = "10px";
         gallery.appendChild(image);
     });
 }
