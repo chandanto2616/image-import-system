@@ -1,0 +1,23 @@
+body {
+    font-family: Arial;
+    padding: 20px;
+}
+
+textarea {
+    width: 400px;
+    height: 100px;
+}
+
+img {
+    width: 150px;
+    margin: 10px;
+}
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#gallery div {
+    text-align: center;
+    margin: 10px;
+}

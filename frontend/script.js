@@ -1,0 +1,79 @@
+let refreshInterval = null;
+let currentFolderId = null;
+
+function extractFolderId(url) {
+    if (url.includes("folders/")) {
+        return url.split("folders/")[1].split("?")[0];
+    }
+    return null;
+}
+
+async function importImages() {
+    const folderUrl = document.getElementById("folderUrl").value;
+    currentFolderId = extractFolderId(folderUrl);
+
+    await fetch("http://127.0.0.1:5000/import/google-drive", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ folder_url: folderUrl })
+    });
+
+    startAutoRefresh();
+}
+
+function startAutoRefresh() {
+    if (refreshInterval) return;
+    refreshInterval = setInterval(loadImages, 2000);
+}
+
+function stopAutoRefresh() {
+    if (refreshInterval) {
+        clearInterval(refreshInterval);
+        refreshInterval = null;
+    }
+}
+
+async function cancelImport() {
+    await fetch("http://127.0.0.1:5000/import/cancel", {
+        method: "POST"
+    });
+
+    stopAutoRefresh();
+}
+
+function clearUI() {
+    stopAutoRefresh();
+
+    // Clear image display
+    document.getElementById("gallery").innerHTML = "";
+
+    // Clear folder input field
+    document.getElementById("folderUrl").value = "";
+
+    // Reset current folder tracking
+    currentFolderId = null;
+}
+
+
+async function loadImages() {
+    if (!currentFolderId) return;
+
+    const res = await fetch(
+        `http://127.0.0.1:5000/images/${currentFolderId}`
+    );
+
+    const data = await res.json();
+
+    const gallery = document.getElementById("gallery");
+    gallery.innerHTML = "";
+
+    data.images.forEach(img => {
+        const image = document.createElement("img");
+        image.src = img.storage_path;
+        image.style.width = "150px";
+        image.style.margin = "10px";
+        gallery.appendChild(image);
+    });
+}
