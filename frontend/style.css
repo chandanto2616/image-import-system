@@ -151,3 +151,17 @@ body {
         height: 140px;
     }
 }
+.note {
+    margin-top: 15px;
+    padding: 12px 14px;
+    background: #fff8e1;
+    border-left: 4px solid #f1c40f;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #6b5e00;
+}
+
+.note ul {
+    margin-top: 6px;
+    padding-left: 18px;
+}
