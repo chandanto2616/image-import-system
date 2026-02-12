@@ -12,7 +12,7 @@ async function importImages() {
     const folderUrl = document.getElementById("folderUrl").value;
     currentFolderId = extractFolderId(folderUrl);
 
-    await fetch("http://127.0.0.1:5000/import/google-drive", {
+    await fetch("https://image-api-t4am.onrender.com/import/google-drive", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -36,7 +36,7 @@ function stopAutoRefresh() {
 }
 
 async function cancelImport() {
-    await fetch("http://127.0.0.1:5000/import/cancel", {
+    await fetch("https://image-api-t4am.onrender.com/import/cancel", {
         method: "POST"
     });
 
@@ -61,7 +61,7 @@ async function loadImages() {
     if (!currentFolderId) return;
 
     const res = await fetch(
-        `http://127.0.0.1:5000/images/${currentFolderId}`
+        `https://image-api-t4am.onrender.com/images/${currentFolderId}`
     );
 
     const data = await res.json();
