@@ -66,6 +66,7 @@ def import_images():
                 mime_type=file["mimeType"],
                 storage_path=cloud_url,
             )
+            
 
             db.session.add(image)
             db.session.commit()
@@ -76,6 +77,7 @@ def import_images():
         except Exception as e:
             print("Error:", str(e))
             db.session.rollback()
+            
 
     return jsonify({
         "imported": imported_count,
